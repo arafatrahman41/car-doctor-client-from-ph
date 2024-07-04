@@ -36,31 +36,31 @@ const AuthProvider = ({ children }) => {
       const UserEmail = currentUser?.email || user?.email;
       const loggedUser = { email: UserEmail };
       setUser(currentUser);
-      console.log("current user", currentUser);
+      // console.log("current user", currentUser);
       setLoading(false);
       // if user exists then issue a token
       if (currentUser) {
         axios
-          .post("http://localhost:5000/jwt", loggedUser, {
+          .post("https://car-doctor-server-nine-lovat.vercel.app/jwt", loggedUser, {
             withCredentials: true,
           })
           .then((res) => {
-            console.log("token response", res.data);
+            // console.log("token response", res.data);
           });
       } else {
         axios
-          .post("http://localhost:5000/logout", loggedUser, {
+          .post("https://car-doctor-server-nine-lovat.vercel.app/logout", loggedUser, {
             withCredentials: true,
           })
           .then((res) => {
-            console.log(res.data);
+            // console.log(res.data);
           });
       }
     });
     return () => {
       return unsubscribe();
     };
-  }, []);
+  }, [user]);
 
   const authInfo = {
     user,
